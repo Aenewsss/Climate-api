@@ -4,6 +4,7 @@ const path = require('path')
 const PORT = 3000
 
 const cache = require('./src/redis/cache')
+const callApi = require('./src/javascript/api')
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
@@ -13,7 +14,16 @@ app.set('view engine', 'ejs')
 app.set('views', 'src/view')
 
 app.get('/', (req, res) => {
-    res.render('index')
+   
+    callApi('estados unidos')
+
+    // res.render('index', {
+    //     temperature, maxTemperature, 
+    //     minTemperature, cityWeather, 
+    //     weatherDescription, wind, 
+    //     cloudiness, humidity, 
+    //     sunrise, sunset, hour
+    // })
 })
 
 app.post('/', (req, res) => {
