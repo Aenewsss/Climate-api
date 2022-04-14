@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylesheets/index.css">
+    <script src="javascript/index.js" defer></script>
+    <title>Climate Api</title>
+    <link rel="shortcut icon" href="icons/icons8-cloudflare-250.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="container">
+        <div class="climate">
+            <div class="image-background">
+                <img width="200" height="200" id="climate-image" src="icons/icons8-cloudflare-250.png" alt="">
+            </div>
+            <div class="city-search text-center">
+                <input type="text" id="select-city" placeholder="Insira uma cidade">
+                <button class="ml-3" id="search-button" type="button">
+                    <img src="icons/icons8-pesquisar-24.svg" alt="search">
+                </button>
+            </div>
+            <div class="temperature mt-4">
+                <h1 id="temperature"></h1>
+                <div class="min-max-temp ml-3">
+                    <div class="max-temperature">
+                        <span class="h4">🡩<span id="max-temperature"></span></span>
+                    </div>
+                    <div class="min-temperature">
+                        <span class="h4">🡫<span id="min-temperature"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="city-weather text-center mt-4">
+                <div class="city-name-weather">
+                    <span class="h4" id="city-weather"></span>
+                </div>
+                <div class="weather-description">
+                    <span id="weather-description"></span>
+                </div>
+            </div>
+            <div class="description mt-4">
+                <div class="col">
+                    <ul>
+                        <li>Vento: <span id="wind"></span></li>
+                        <li>Nebulosidade: <span id="cloudiness"></span></li>
+                        <li>Umidade: <span id="humidity"></span></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <ul>
+                        <li>Sunrise: <span id="sunrise"></span></li>
+                        <li>Sunset: <span id="sunset"></span></li>
+                        <li>Hora: <span id="hour"></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center">&COPY; Aenã Martinelli</footer>
+</body>
+</html>

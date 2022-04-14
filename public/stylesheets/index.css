@@ -1,0 +1,166 @@
+
+body{
+    background: linear-gradient(90deg, #00130f, #00000f);
+}
+
+ul{
+    list-style: none;
+}
+
+input{
+    border-radius: 40px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-family: 'Helvetica';
+    font-size: large;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+h1{
+    margin: 0;
+    font-weight: normal;
+}
+
+.h4{
+    margin: 0;
+    font-weight: normal;
+}
+
+.container{
+    color: whitesmoke;
+    width: 100%;
+}
+
+.climate{
+    background-color: black;
+    border-radius: 30px;
+    max-width: 900px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.city-search{
+    display: flex;
+    justify-content: center;
+}
+
+.temperature{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#temperature{
+    font-size: 80px;
+}
+
+.min-max-temp{
+    font-size: 15px;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.description{
+    display: flex;
+    line-height: 1.6;
+    justify-content: center;
+}
+
+.ml-1{
+    margin-left: 3px;
+}
+.ml-2{
+    margin-left: 6px;
+}
+.ml-3{
+    margin-left: 9px;
+}
+
+
+.mr-1{
+    margin-left: 3px;
+}
+.mr-2{
+    margin-left: 6px;
+}
+.mr-3{
+    margin-left: 9px;
+}
+
+
+.mt-1{
+    margin-top: 3px;
+}
+.mt-2{
+    margin-top: 6px;
+}
+.mt-3{
+    margin-top: 9px;
+}
+
+.mt-4{
+    margin-top: 12px;
+}
+
+.image-background{
+    position: fixed;
+    width: inherit;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.image-background img{
+    opacity: 0.4;
+}
+
+.f-temp, .k-temp{
+    color: antiquewhite;
+}
+
+.cloud-icon{
+    background-image: url('./icons/icons8-cloudflare-250.png');
+    background-size: 300px;
+}
+
+@media only screen and (min-width:700px) {
+    .climate{
+        width: 600px;
+    }   
+}
+
+@media only screen and (max-width: 699px){
+    .climate{
+        width: 500px;
+    }
+    .temperature{
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    .climate{
+        width: 400px;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .climate{
+        width: 300px;
+    }
+}
