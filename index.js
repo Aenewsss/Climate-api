@@ -3,7 +3,6 @@ const app = express()
 const path = require('path')
 const PORT = 3000
 
-const cache = require('./src/redis/cache')
 const callApi = require('./src/javascript/api')
 
 app.use(express.urlencoded({ extended: true }))

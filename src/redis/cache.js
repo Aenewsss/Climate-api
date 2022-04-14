@@ -41,4 +41,4 @@ class Cache{
     }
 }
 
-module.export = new Cache()
+module.exports = new Cache()

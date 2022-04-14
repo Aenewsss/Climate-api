@@ -1,4 +1,6 @@
 const axios = require('axios')
+const cache = require('../redis/cache')
+
 require('dotenv').config()
 
 const API_KEY = process.env.WEATHER_API_KEY
@@ -9,6 +11,11 @@ const convert_date = require('./convert_date')
 const discover_country_name = require('./country_name')
 
 async function callApi(city) {
+
+    const cached = await cache.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
+
+    if(cached) return cached
+
     let temperature, minTemperature, maxTemperature, 
     cityName, icon, weather, weatherDescription, wind, 
     cloudiness, sunrise, sunset, humidity, hour, countryName
