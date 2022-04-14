@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/index.css">
-    <script src="javascript/index.js" defer></script>
     <title>Climate Api</title>
     <link rel="shortcut icon" href="icons/icons8-cloudflare-250.png" type="image/x-icon">
 </head>
@@ -18,10 +17,12 @@
                 <img width="200" height="200" id="climate-image" src="icons/icons8-cloudflare-250.png" alt="">
             </div>
             <div class="city-search text-center">
-                <input type="text" id="select-city" placeholder="Insira uma cidade">
-                <button class="ml-3" id="search-button" type="button">
-                    <img src="icons/icons8-pesquisar-24.svg" alt="search">
-                </button>
+                <form action="/" method="post">
+                    <input name="cityName" type="text" id="select-city" placeholder="Insira uma cidade">
+                    <button class="ml-3" id="search-button">
+                        <img src="icons/icons8-pesquisar-24.svg" alt="search">
+                    </button>
+                </form>
             </div>
             <div class="temperature mt-4">
                 <h1 id="temperature"></h1>
