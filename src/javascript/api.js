@@ -51,7 +51,7 @@ async function callApi(city) {
     return {
         temperature, minTemperature, maxTemperature, cityName, icon,
         weather, weatherDescription, wind,
-        humidity, cloudiness, sunrise, sunset, countryName
+        humidity, cloudiness, sunrise, sunset, countryName, hour
     }
 
 }
