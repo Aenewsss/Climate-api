@@ -8,12 +8,11 @@ const change_background_icon = require('./change_icon')
 const convert_date = require('./convert_date')
 const discover_country_name = require('./country_name')
 
-const callApi = (city) => {
+function callApi(city){
     axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
-        .then(response => {
+        .then(async function(response){
             
             const data = response.data
-
             let temp = convert_temperature(data.main.temp)
             let min_temp = convert_temperature(data.main.temp_min)
             let max_temp = convert_temperature(data.main.temp_max)
@@ -27,19 +26,20 @@ const callApi = (city) => {
             let sunset = convert_date(data.sys.sunset)
             let humidity = data.main.humidity + "%"
 
+            console.log(temp)
+
             let hour_now = new Date()
             hour_now = hour_now.getHours() + ":" + hour_now.getMinutes()
 
-            discover_country_name(data.sys.country)
-                .then(response => {
-                    city_weather_name.textContent = city_name + "(" + response + ")" + " - " + weather
-                })
+            let country_name = await discover_country_name(data.sys.country)
 
-            return {
-                temp, min_temp, max_temp,
-                weather, weather_description, wind, 
-                humidity, cloudiness, sunrise, sunset,
-            }
+            // return {
+                console.log(
+                    temp, min_temp, max_temp,
+                    weather, weather_description, wind, 
+                    humidity, cloudiness, sunrise, sunset, country_name, city_name
+                    )
+            // }
         })
         .catch(e => {
             console.log(e.message)

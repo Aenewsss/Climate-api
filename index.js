@@ -17,13 +17,15 @@ app.get('/', (req, res) => {
 
     callApi('estados unidos')
 
-    res.render('index', {
-        temperature, minTemperature,
-        maxTemperature, cityWeather,
-        weatherDescription, wind,
-        cloudiness, humidity, sunrise,
-        sunset, hour,
-    })
+    // console.log(response)
+
+    // res.render('index', {
+    //     temperature, minTemperature,
+    //     maxTemperature, cityWeather,
+    //     weatherDescription, wind,
+    //     cloudiness, humidity, sunrise,
+    //     sunset, hour,
+    // })
 
     // res.render('index', {
     //     temperature, maxTemperature, 
