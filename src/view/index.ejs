@@ -18,7 +18,7 @@
             </div>
             <div class="city-search text-center">
                 <form action="/" method="post">
-                    <input name="cityName" type="text" id="select-city" placeholder="Insira uma cidade">
+                    <input name="city" type="text" id="select-city" placeholder="Insira uma cidade">
                     <button class="ml-3" id="search-button">
                         <img src="icons/icons8-pesquisar-24.svg" alt="search">
                     </button>
@@ -37,7 +37,7 @@
             </div>
             <div class="city-weather text-center mt-4">
                 <div class="city-name-weather">
-                    <span class="h4"><%= cityWeather %> </span>
+                    <span class="h4"><%= cityName %> (<%= countryName%>) <%= weather %>  </span>
                 </div>
                 <div class="weather-description">
                     <span><%= weatherDescription %> </span>

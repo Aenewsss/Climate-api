@@ -8,42 +8,51 @@ const change_background_icon = require('./change_icon')
 const convert_date = require('./convert_date')
 const discover_country_name = require('./country_name')
 
-function callApi(city){
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
-        .then(async function(response){
-            
+async function callApi(city) {
+    let temperature, minTemperature, maxTemperature, 
+    cityName, icon, weather, weatherDescription, wind, 
+    cloudiness, sunrise, sunset, humidity, hour, countryName
+    
+    await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
+        .then(async function (response) {
+
             const data = response.data
-            let temp = convert_temperature(data.main.temp)
-            let min_temp = convert_temperature(data.main.temp_min)
-            let max_temp = convert_temperature(data.main.temp_max)
 
-            let city_name = data.name
-            let weather = change_background_icon(data.weather[0].main)
-            let weather_description = data.weather[0].description
-            let wind = (data.wind.speed * 3.6).toFixed(1) + " km/h"
-            let cloudiness = data.clouds.all + "%"
-            let sunrise = convert_date(data.sys.sunrise)
-            let sunset = convert_date(data.sys.sunset)
-            let humidity = data.main.humidity + "%"
+            temperature = convert_temperature(data.main.temp)
+            minTemperature = convert_temperature(data.main.temp_min)
+            maxTemperature = convert_temperature(data.main.temp_max)
 
-            console.log(temp)
+            cityName = data.name
 
-            let hour_now = new Date()
-            hour_now = hour_now.getHours() + ":" + hour_now.getMinutes()
+            let responseFunction = change_background_icon(data.weather[0].main)
 
-            let country_name = await discover_country_name(data.sys.country)
+            icon = responseFunction[0]
+            weather = responseFunction[1]
 
-            // return {
-                console.log(
-                    temp, min_temp, max_temp,
-                    weather, weather_description, wind, 
-                    humidity, cloudiness, sunrise, sunset, country_name, city_name
-                    )
-            // }
+            weatherDescription = data.weather[0].description
+            wind = (data.wind.speed * 3.6).toFixed(1) + " km/h"
+            cloudiness = data.clouds.all + "%"
+            sunrise = convert_date(data.sys.sunrise)
+            sunset = convert_date(data.sys.sunset)
+            humidity = data.main.humidity + "%"
+
+            hour = new Date()
+            hour = hour.getHours() + ":" + hour.getMinutes()
+
+            await discover_country_name(data.sys.country)
+                .then(response => countryName = response)
+                .catch(e => console.log(e))
+
         })
         .catch(e => {
             console.log(e.message)
         })
+
+    return {
+        temperature, minTemperature, maxTemperature, cityName, icon,
+        weather, weatherDescription, wind,
+        humidity, cloudiness, sunrise, sunset, countryName
+    }
 
 }
 

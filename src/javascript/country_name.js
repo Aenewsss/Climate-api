@@ -1,10 +1,14 @@
-async function discover_country_name(code){
-    let country_name = ''
-    const COUNTRY_API = `https://restcountries.com/v3.1/alpha/${code}`
+const axios = require('axios')
 
-    let response = await fetch(COUNTRY_API)
-    let data = await response.json()
-    country_name += data[0].name.common
+async function discover_country_name(code) {
+    let country_name = ''
+    await axios.get(`https://restcountries.com/v3.1/alpha/${code}`)
+        .then(response => {
+            let data = response.data
+            country_name += data[0].name.common
+        })
+        .catch(e => console.log(e.message))
+    
     return country_name
 }
 

@@ -13,31 +13,38 @@ app.use(express.static(path.join(__dirname, '/public')))
 app.set('view engine', 'ejs')
 app.set('views', 'src/view')
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
 
     callApi('estados unidos')
+        .then(response => {
+            let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
+                } = response
 
-    // console.log(response)
-
-    // res.render('index', {
-    //     temperature, minTemperature,
-    //     maxTemperature, cityWeather,
-    //     weatherDescription, wind,
-    //     cloudiness, humidity, sunrise,
-    //     sunset, hour,
-    // })
-
-    // res.render('index', {
-    //     temperature, maxTemperature, 
-    //     minTemperature, cityWeather, 
-    //     weatherDescription, wind, 
-    //     cloudiness, humidity, 
-    //     sunrise, sunset, hour
-    // })
+                res.render('index', {
+                    temperature, minTemperature,
+                    maxTemperature, weather,
+                    weatherDescription, wind,
+                    cloudiness, humidity, sunrise,
+                    sunset, hour, countryName, icon, cityName
+                })
+        })
 })
 
 app.post('/', (req, res) => {
-    res.send(req.body.cityName)
+    let { city } = req.body
+    callApi(city)
+        .then(response => {
+            let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
+                } = response
+
+                res.render('index', {
+                    temperature, minTemperature,
+                    maxTemperature, weather,
+                    weatherDescription, wind,
+                    cloudiness, humidity, sunrise,
+                    sunset, hour, countryName, icon, cityName
+                })
+        })
 })
 
 app.listen(PORT, () => console.log(`Server is at http://localhost:${PORT}`))
