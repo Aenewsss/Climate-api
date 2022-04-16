@@ -14,46 +14,34 @@ async function callApi(city) {
 
     const cached = await cache.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
 
-    if(cached) return cached
+    if (cached) return cached
 
-    let temperature, minTemperature, maxTemperature, 
-    cityName, icon, weather, weatherDescription, wind, 
-    cloudiness, sunrise, sunset, humidity, hour, countryName
-    
-    await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
-        .then(async function (response) {
+    let apiResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
 
-            const data = response.data
+    const data = apiResponse.data
 
-            temperature = convert_temperature(data.main.temp)
-            minTemperature = convert_temperature(data.main.temp_min)
-            maxTemperature = convert_temperature(data.main.temp_max)
+    let temperature = convert_temperature(data.main.temp)
+    let minTemperature = convert_temperature(data.main.temp_min)
+    let maxTemperature = convert_temperature(data.main.temp_max)
 
-            cityName = data.name
+    let cityName = data.name
 
-            let responseFunction = change_background_icon(data.weather[0].main)
+    let responseFunction = change_background_icon(data.weather[0].main)
 
-            icon = responseFunction[0]
-            weather = responseFunction[1]
+    let icon = responseFunction[0]
+    let weather = responseFunction[1]
 
-            weatherDescription = data.weather[0].description
-            wind = (data.wind.speed * 3.6).toFixed(1) + " km/h"
-            cloudiness = data.clouds.all + "%"
-            sunrise = convert_date(data.sys.sunrise)
-            sunset = convert_date(data.sys.sunset)
-            humidity = data.main.humidity + "%"
+    let weatherDescription = data.weather[0].description
+    let wind = (data.wind.speed * 3.6).toFixed(1) + " km/h"
+    let cloudiness = data.clouds.all + "%"
+    let sunrise = convert_date(data.sys.sunrise)
+    let sunset = convert_date(data.sys.sunset)
+    let humidity = data.main.humidity + "%"
 
-            hour = new Date()
-            hour = hour.getHours() + ":" + hour.getMinutes()
+    let hour = new Date()
+    hour = hour.getHours() + ":" + hour.getMinutes()
 
-            await discover_country_name(data.sys.country)
-                .then(response => countryName = response)
-                .catch(e => console.log(e))
-
-        })
-        .catch(e => {
-            console.log(e.message)
-        })
+    let countryName = await discover_country_name(data.sys.country)
 
     return {
         temperature, minTemperature, maxTemperature, cityName, icon,

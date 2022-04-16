@@ -14,19 +14,20 @@ app.set('views', 'src/view')
 
 app.get('/', async (req, res) => {
 
-    callApi('estados unidos')
-        .then(response => {
-            let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
-                } = response
+    let response = await callApi('estados unidos')
+    console.log(response)
+        // .then(response => {
+        //     let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
+        //         } = response
 
-                res.render('index', {
-                    temperature, minTemperature,
-                    maxTemperature, weather,
-                    weatherDescription, wind,
-                    cloudiness, humidity, sunrise,
-                    sunset, hour, countryName, icon, cityName
-                })
-        })
+        //         res.render('index', {
+        //             temperature, minTemperature,
+        //             maxTemperature, weather,
+        //             weatherDescription, wind,
+        //             cloudiness, humidity, sunrise,
+        //             sunset, hour, countryName, icon, cityName
+        //         })
+        // })
 })
 
 app.post('/', (req, res) => {
