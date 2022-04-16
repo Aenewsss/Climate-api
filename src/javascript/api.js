@@ -12,12 +12,13 @@ const discover_country_name = require('./country_name')
 
 async function callApi(city) {
 
-    const cached = await cache.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
+    city = city.toUpperCase()
+    const cached = await cache.get(city)
 
     if (cached) return cached
-
+    
     let apiResponse = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&lang=pt`)
-
+    
     const data = apiResponse.data
 
     let temperature = convert_temperature(data.main.temp)
@@ -42,6 +43,11 @@ async function callApi(city) {
     hour = hour.getHours() + ":" + hour.getMinutes()
 
     let countryName = await discover_country_name(data.sys.country)
+
+    cache.set(cityName.toUpperCase(), 
+        {temperature, minTemperature, maxTemperature, cityName, icon,
+        weather, weatherDescription, wind,humidity, cloudiness, sunrise, sunset, countryName, hour
+        }, 60)
 
     return {
         temperature, minTemperature, maxTemperature, cityName, icon,

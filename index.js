@@ -15,36 +15,37 @@ app.set('views', 'src/view')
 app.get('/', async (req, res) => {
 
     let response = await callApi('estados unidos')
-    console.log(response)
-        // .then(response => {
-        //     let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
-        //         } = response
 
-        //         res.render('index', {
-        //             temperature, minTemperature,
-        //             maxTemperature, weather,
-        //             weatherDescription, wind,
-        //             cloudiness, humidity, sunrise,
-        //             sunset, hour, countryName, icon, cityName
-        //         })
-        // })
+    let { temperature, minTemperature, maxTemperature, weather,
+        weatherDescription, wind, cloudiness, humidity, sunrise,
+        sunset, hour, countryName, icon, cityName } = response
+
+    res.render('index', {
+        temperature, minTemperature,
+        maxTemperature, weather,
+        weatherDescription, wind,
+        cloudiness, humidity, sunrise,
+        sunset, hour, countryName, icon, cityName
+    })
 })
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     let { city } = req.body
-    callApi(city)
-        .then(response => {
-            let { temperature, minTemperature, maxTemperature, weather, weatherDescription, wind,cloudiness, humidity, sunrise, sunset, hour, countryName,icon, cityName
-                } = response
 
-                res.render('index', {
-                    temperature, minTemperature,
-                    maxTemperature, weather,
-                    weatherDescription, wind,
-                    cloudiness, humidity, sunrise,
-                    sunset, hour, countryName, icon, cityName
-                })
-        })
+
+    let response = await callApi(city)
+
+    let { temperature, minTemperature, maxTemperature, weather,
+        weatherDescription, wind, cloudiness, humidity, sunrise,
+        sunset, hour, countryName, icon, cityName } = response
+
+    res.render('index', {
+        temperature, minTemperature,
+        maxTemperature, weather,
+        weatherDescription, wind,
+        cloudiness, humidity, sunrise,
+        sunset, hour, countryName, icon, cityName
+    })
 })
 
 app.listen(PORT, () => console.log(`Server is at http://localhost:${PORT}`))
